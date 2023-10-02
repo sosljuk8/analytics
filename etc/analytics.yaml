@@ -1,0 +1,15 @@
+Name: analytics
+Host: 0.0.0.0
+Port: 8888
+Instance:
+  Server: false
+  Worker: true
+Mysql:
+  Driver: sqlite3 # use mysql or in-memory sqlite3
+  User: root
+  Passwd: your-password
+  Addr: localhost:30004
+  Dbname: iam
+  MaxConnections: 100
+Jwt:
+  Secret: do-not-use-the-secret-in-production

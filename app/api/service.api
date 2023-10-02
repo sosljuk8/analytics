@@ -1,0 +1,43 @@
+syntax = "v1"
+
+info(
+	title: "analytics"
+	desc: "The starter service provides crud for analytics."
+	author: "sosljuk8"
+	email: "dev@estatie.com"
+)
+
+type (
+	PrimeTime {
+		Hour  uint8 `json:"hour"`
+		Count int   `json:"count"`
+	}
+    // @ent.entity: Message
+	Message {
+		Direction string `json:"direction"`
+		Sent      string `json:"sent"`
+		MailboxId int    `json:"mailboxId"`
+		CrmRid    int    `json:"crmRid"`
+	}
+
+	PrimeCache {
+		Hour  uint8 `json:"hour"`
+		Count int   `json:"count"`
+	}
+
+	RangeQuery {
+		After  string `query:"after"`
+		Before string `query:"before"`
+	}
+)
+
+@server(
+	group: primetime
+	middleware: APIAuth
+)
+
+service analytics {
+	@doc "List all Records by UUID"
+	@handler List
+	get /api/v1/primetime/request (RangeQuery) returns ([]PrimeTime)
+}

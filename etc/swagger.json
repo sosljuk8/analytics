@@ -1,0 +1,148 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "analytics",
+    "description": "The starter service provides crud for analytics.",
+    "version": ""
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/primetime/request": {
+      "get": {
+        "summary": "List all Records by UUID",
+        "operationId": "List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/[]PrimeTime"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "after",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "primetime"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Message": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "direction": {
+          "type": "string"
+        },
+        "sent": {
+          "type": "string"
+        },
+        "mailboxId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "crmRid": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Message",
+      "required": [
+        "id",
+        "direction",
+        "sent",
+        "mailboxId",
+        "crmRid"
+      ]
+    },
+    "PrimeCache": {
+      "type": "object",
+      "properties": {
+        "hour": {
+          "$ref": "#/definitions/uint8"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "PrimeCache",
+      "required": [
+        "hour",
+        "count"
+      ]
+    },
+    "PrimeTime": {
+      "type": "object",
+      "properties": {
+        "hour": {
+          "$ref": "#/definitions/uint8"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "PrimeTime",
+      "required": [
+        "hour",
+        "count"
+      ]
+    },
+    "RangeQuery": {
+      "type": "object",
+      "properties": {
+        "After": {
+          "type": "string"
+        },
+        "Before": {
+          "type": "string"
+        }
+      },
+      "title": "RangeQuery",
+      "required": [
+        "after",
+        "before"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "description": "Enter JWT Bearer token **_only_**",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ]
+}
