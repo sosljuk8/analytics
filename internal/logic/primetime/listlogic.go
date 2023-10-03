@@ -31,6 +31,9 @@ func (l *ListLogic) List(req *types.RangeQuery) (resp []types.PrimeTime, err err
 			Count: rand.Intn(1000),
 		}
 	}
-
+	//_, err = l.svcCtx.Store.Messages.CreateInitialMessage()
+	//if err != nil {
+	//	return nil, err
+	//}
 	return times, nil
 }
