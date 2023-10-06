@@ -35,5 +35,7 @@ type (
 	}
 	// RangeQuery provides DTO interface for RangeQuery type.
 	RangeQuery interface {
+		GetStart() string
+		GetFinish() string
 	}
 )

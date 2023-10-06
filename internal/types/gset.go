@@ -90,3 +90,13 @@ func (t *PrimeCache) GetCount() int {
 func (t *PrimeCache) SetCount(Count int) {
 	t.Count = Count
 }
+
+// GetAfter returns the value of After.
+func (t *RangeQuery) GetAfter() string {
+	return t.After
+}
+
+// SetAfter sets the value of After.
+func (t *RangeQuery) SetAfter(After string) {
+	t.After = After
+}

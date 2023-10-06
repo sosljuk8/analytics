@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/sosljuk8/analytics/internal/svc"
 	"github.com/sosljuk8/analytics/internal/types"
-	"math/rand"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,17 +22,11 @@ func NewListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ListLogic {
 	}
 }
 
-func (l *ListLogic) List(req *types.RangeQuery) (resp []types.PrimeTime, err error) {
-	times := make([]types.PrimeTime, 10)
-	for i := 0; i < 10; i++ {
-		times[i] = types.PrimeTime{
-			Hour:  uint8(rand.Intn(64)),
-			Count: rand.Intn(1000),
-		}
+func (l *ListLogic) List(req *types.RangeQuery) (resp []svc.PrimeTime, err error) {
+
+	times, err := l.svcCtx.Store.Load(req)
+	if err != nil {
+		return nil, err
 	}
-	//_, err = l.svcCtx.Store.Messages.CreateInitialMessage()
-	//if err != nil {
-	//	return nil, err
-	//}
 	return times, nil
 }
