@@ -61,7 +61,7 @@ func (s *Stores) Load(req svc.RangeQuery) ([]svc.PrimeTime, error) {
 		return nil, err
 	}
 
-	for _, _ = range messages {
+	for range messages {
 		times = append(times, &types.PrimeTime{
 			Hour:  0,
 			Count: 0,
