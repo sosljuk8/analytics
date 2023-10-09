@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/sosljuk8/analytics/orm"
 
 	"github.com/sosljuk8/analytics/internal/config"
 	"github.com/sosljuk8/analytics/internal/handler"
@@ -23,7 +24,12 @@ func main() {
 	server := rest.MustNewServer(c.RestConf)
 	defer server.Stop()
 
-	ctx := svc.NewServiceContext(c)
+	store := orm.NewStore(c.Mysql)
+	if err := store.Migrate(); err != nil {
+		panic(err)
+	}
+
+	ctx := svc.NewServiceContext(c, store)
 	handler.RegisterHandlers(server, ctx)
 
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)

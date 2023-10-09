@@ -3,11 +3,7 @@
 package ent
 
 import (
-	"context"
-
-	"entgo.io/ent"
 	"github.com/go-playground/validator"
-	"github.com/sosljuk8/analytics/orm/ent/hook"
 )
 
 var Validate = validator.New()
@@ -38,27 +34,4 @@ func (m *MessageMutation) Validate() error {
 	}
 
 	return Validate.Struct(obj)
-}
-
-// MessageValidationHook returns ent hook that validates the mutation before it is applied.
-// Use it on new ent client creation:
-// client := ent.NewClient(ent.Debug(), ent.Hooks(MessageValidationHook()))
-func MessageValidationHook() ent.Hook {
-	h := func(next ent.Mutator) ent.Mutator {
-		return hook.MessageFunc(func(ctx context.Context, m *MessageMutation) (ent.Value, error) {
-			if err := m.Validate(); err != nil {
-				return nil, err
-			}
-			return next.Mutate(ctx, m)
-		})
-	}
-	// Limit the hook only for these operations.
-	return hook.On(h, ent.OpCreate|ent.OpUpdate|ent.OpUpdateOne)
-}
-
-// Validation with struct literals based on ent hooks.
-func Validation() Option {
-	return func(c *config) {
-		c.hooks.Message = append(c.hooks.Message, MessageValidationHook())
-	}
 }

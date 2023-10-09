@@ -97,6 +97,16 @@ func (t *RangeQuery) GetAfter() string {
 }
 
 // SetAfter sets the value of After.
-func (t *RangeQuery) SetAfter(After string) {
-	t.After = After
+func (t *RangeQuery) SetAfter(after string) {
+	t.After = after
+}
+
+// GetBefore returns the value of Before.
+func (t *RangeQuery) GetBefore() string {
+	return t.Before
+}
+
+// SetBefore sets the value of Before.
+func (t *RangeQuery) SetBefore(before string) {
+	t.Before = before
 }

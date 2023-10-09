@@ -6,6 +6,7 @@ Instance:
   Worker: true
 Mysql:
   Driver: sqlite3 # use mysql or in-memory sqlite3
+  SqliteFile: ent.db?allowAllFiles=true
   User: root
   Passwd: your-password
   Addr: localhost:30004
